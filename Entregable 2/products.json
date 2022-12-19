@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Remera",
+		"description": "Remera de algodon",
+		"price": 1000,
+		"thumbnail": "https://coderhouse.com",
+		"code": "123456",
+		"stock": 10,
+		"id": 1
+    }
+  ]

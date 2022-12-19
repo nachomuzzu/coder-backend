@@ -4,34 +4,34 @@ const path = require("path");
 
 class ProductManager{
 
-    constructor(path){
-        this.path = path
+     constructor(){
+        const file = path.join( __dirname, "products.json")
     }
 
-async addProduct(product){
-    try{
-        const savedProduct = await this.getProducts();
-        const verify = savedProduct.find(item => item.code == product.code);
-        const objProduct = Object.keys(product);
-        if(verify){
-            console.error(`Este producto ya existe ${product.code}`)
-        }
-        if(objProduct.length < 6){
-            console.error('Todos los campos deben estar completos');
-        }
-        const newId = savedProduct.length > 0 ? savedProduct[savedProduct.length -1 ].id + 1 : 1
-        const newProduct = {
-            id: newId, 
-            ...product
-        }
-        savedProduct.push(newProduct)
-        const productList = JSON.stringify(savedProduct, null, '\t')
-        await fs.writeFile(this.path, productList)
-        console.log(`${product.title} ha sido agregado`)
-    }catch(error){
-        console.error(error);
-    }
-}
+    async addProduct(product){
+      try{
+          const savedProduct = await this.getProducts();
+          const verify = savedProduct.find(item => item.code == product.code);
+          const objProduct = Object.keys(product);
+          if(verify){
+              console.error(`Este producto ya existe ${product.code}`)
+          }
+          if(objProduct.length < 6){
+              console.error('Todos los campos deben estar completos');
+          }
+          const newId = savedProduct.length > 0 ? savedProduct[savedProduct.length -1 ].id + 1 : 1
+          const newProduct = {
+              id: newId, 
+              ...product
+          }
+          savedProduct.push(newProduct)
+          const productList = JSON.stringify(savedProduct, null, '\t')
+          await fs.writeFile(this.path, productList)
+          console.log(`${product.title} ha sido agregado`)
+      }catch(error){
+          console.error(error);
+      }
+  }
 
 async getProducts(){
     try{
@@ -109,14 +109,4 @@ async deleteProduct(id) {
 }
 }
 
-
 const productManager = new ProductManager();
-
-productManager.addProduct(
-    'producto prueba',
-    'Este es un producto prueba',
-    200,
-    'Sin imagen',
-    'abc123',
-    25
-)
