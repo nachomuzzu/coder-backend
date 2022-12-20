@@ -1,11 +1,11 @@
-const fs = require('fs/promises')
+const fs = require('fs').promises;
 const { existsSync } = require('fs');
 const path = require("path");
 
 class ProductManager{
 
      constructor(){
-        const file = path.join( __dirname, "products.json")
+        this.path = path.join(__dirname, 'products.json');
     }
 
     async addProduct(product){
@@ -110,3 +110,12 @@ async deleteProduct(id) {
 }
 
 const productManager = new ProductManager();
+
+productManager.addProduct({
+    code: 123,
+    title: 'Coca Cola',
+    description: 'Bebida gaseosa',
+    price: 100,
+    stock: 10,
+    thumbnail: 'https://www.coca-cola.com.ar/content/dam/journey/ar/es/private/brands/coca-cola/coca-cola.png'
+    })
